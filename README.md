@@ -11,4 +11,5 @@ Cifar 100 dataset with 91% accuracy
 
 plant condition classification DL 
 
+MC-Ql-Sarsa are reinforcment learning techniques i applied on cart pole problem
 
