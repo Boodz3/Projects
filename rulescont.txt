@@ -1,0 +1,196 @@
+
+is_Qualified_for_DSIntern
+    foreach
+        facts.QualifiedForTech(DS,$y)
+        check $y < 2
+        facts.tech_cert(DS, $_any)
+        fr.DS_Skill(Lang, $lang)
+        fr.DS_Skill(General, $gen)
+        facts.tech_skill(Lang, $lang)
+        facts.tech_skill(General, $gen)
+    assert 
+        facts.QualifiedForJob('Data Science Intern')
+    
+
+is_Qualified_for_DSJunior
+    foreach
+        facts.QualifiedForTech(DS,$y)
+        check $y >= 2
+        facts.QualifiedForTech(DS,$ys)
+        check $ys < 5
+        facts.tech_cert(DS, $_any)
+        fr.DS_Skill(Lang, $lang)
+        fr.DS_Skill(Req, $req)
+        fr.DS_Skill(General, $gen)
+        facts.tech_skill(Lang, $lang)
+        facts.tech_skill(Req, $req)
+        facts.tech_skill(General, $gen)
+    assert 
+        facts.QualifiedForJob('Data Science Junior')
+    
+
+is_Qualified_for_DSSenior
+    foreach
+        facts.QualifiedForTech(DS,$y)
+        check $y >= 5
+        facts.tech_cert(DS, $_any)
+        facts.tech_skill(Lang,'Python')
+        facts.tech_skill(Lang,'R')
+        facts.tech_skill(Lang,'SQL')
+        facts.tech_skill(Req,'Data Analysis')
+        facts.tech_skill(Req,'Data Mining')
+        facts.tech_skill(Req,'Data Visualization')
+        facts.tech_skill(General,'Presentation')
+    assert 
+        facts.QualifiedForJob('Data Science Senior')
+    
+is_Qualified_for_ITIntern
+    foreach
+        facts.QualifiedForTech(IT,$y)
+        check $y < 2
+        facts.tech_cert(IT, $_any)
+        fr.IT_Skill(Lang, $lang)
+        fr.IT_Skill(General, $gen)
+        facts.tech_skill(Lang, $lang)
+        facts.tech_skill(General, $gen)
+    assert 
+        facts.QualifiedForJob('Information Technology Intern')
+    
+
+is_Qualified_for_ITJunior
+    foreach
+        facts.QualifiedForTech(IT,$y)
+        check $y >= 2
+        facts.QualifiedForTech(IT,$ys)
+        check $ys < 5
+        facts.tech_cert(IT, $_any)
+        fr.IT_Skill(Lang, $lang)
+        fr.IT_Skill(Req, $req)
+        fr.IT_Skill(General, $gen)
+        facts.tech_skill(Lang, $lang)
+        facts.tech_skill(Req, $req)
+        facts.tech_skill(General, $gen)
+    assert 
+        facts.QualifiedForJob('Information Technology Junior')
+    
+
+is_Qualified_for_ITSenior
+    foreach
+        facts.QualifiedForTech(IT,$y)
+        check $y >= 5
+        facts.tech_cert(IT, $_any)
+        facts.tech_skill(Lang, 'Bash')
+        facts.tech_skill(Lang,'python')
+        facts.tech_skill(Req,'Windows')
+        facts.tech_skill(Req,'Linux')
+        facts.tech_skill(Req,'MacOS')
+        facts.tech_skill(Req ,'Networking')
+        facts.tech_skill(General,'Troubleshooting')
+        facts.tech_skill(General,'Communication')
+    assert 
+        facts.QualifiedForJob('Information Technology Senior')
+    
+
+is_Qualified_for_CSIntern
+    foreach
+        facts.QualifiedForTech(CS,$y)
+        check $y <2 
+        facts.tech_cert(CS, $_any)
+        fr.CS_Skill(Lang, $lang)
+        fr.CS_Skill(General, $gen)
+        facts.tech_skill(Lang, $lang)
+        facts.tech_skill(General, $gen)
+    assert
+        facts.QualifiedForJob('Cyber Security Intern')
+    
+
+is_Qualified_for_CSJunior
+    foreach
+        facts.QualifiedForTech(CS,$y)
+        check $y >=2 
+        facts.QualifiedForTech(CS,$ys)
+        check $ys < 5
+        facts.tech_cert(CS, $_any)
+        fr.CS_Skill(Lang, $lang)
+        fr.CS_Skill(Req, $req)
+        fr.CS_Skill(General, $gen)
+        facts.tech_skill(Lang, $lang)
+        facts.tech_skill(Req, $req)
+        facts.tech_skill(General, $gen)
+    assert
+        facts.QualifiedForJob('Cyber Security Junior')
+    
+
+is_Qualified_for_CSSenior
+    foreach
+       facts.QualifiedForTech(CS,$y)
+       check $y >= 5
+       facts.tech_cert(CS, $_any)
+       facts.tech_skill(Lang,'Python')
+       facts.tech_skill(Lang,'C++')
+       facts.tech_skill(Lang,'HTML')
+       facts.tech_skill(Lang,'CSS')
+       facts.tech_skill(Lang,'JavaScript')
+       facts.tech_skill(Req,'Encryption')
+       facts.tech_skill(Req,'Security Protocols')
+       facts.tech_skill(Req,'Ethical Hacking')
+       facts.tech_skill(Req,'Web Development')
+       facts.tech_skill(General,'Teamwork')
+       facts.tech_skill(General,'Communication')
+    assert 
+       facts.QualifiedForJob('Cyber Security Senior')
+
+is_Qualified_for_Security
+    foreach
+        facts.gender(male)
+    assert  
+        facts.QualifiedForJob('Security')
+    
+        
+is_Qualified_for_Service
+    foreach
+        facts.gender(female)
+    assert 
+        facts.QualifiedForJob('Service')
+    
+
+is_Qualified_for_receptionist
+    foreach
+        facts.business_cert(Languages, $_any)
+    assert
+        facts.QualifiedForJob('Receptionist')
+
+
+
+is_Qualified_For_Business
+    foreach
+        facts.business_degree($_any)
+        facts.business_experience($field,$years)
+    assert
+        facts.QualifiedForbusiness($field,$years)
+    
+is_Qualified_For_Business_SL
+    foreach
+        notany
+            facts.non_degree($_any)
+        facts.business_cert($_any, $_any)
+        facts.business_experience($field, $years)
+        fr.equivDegree($field, $ryears)
+        check $years >= $ryears
+        $eyears = $years - $ryears
+    assert 
+        facts.QualifiedForbusiness($field, $eyears )
+    
+
+is_Qualified_for_Sales
+    foreach
+        facts.QualifiedForbusiness(Sales,$_any)
+    assert 
+        facts.QualifiedForJob('Sales')
+    
+
+is_Qualified_For_Accounting
+    foreach
+        facts.QualifiedForbusiness(Accounting,$_any)
+    assert 
+        facts.QualifiedForJob('Accountant')
